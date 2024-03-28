@@ -2,10 +2,13 @@ package tw.edu.pu.csim.tcyang.changetext
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.View.OnLongClickListener
+import android.view.View.OnTouchListener
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity(), OnClickListener {
@@ -18,6 +21,20 @@ class MainActivity : AppCompatActivity(), OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        var img: ImageView = findViewById(R.id.img)
+        img.setOnTouchListener(object:OnTouchListener{
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                if (event?.action == MotionEvent.ACTION_DOWN){
+                    txv.text = "手指按下"
+                }
+                else if(event?.action == MotionEvent.ACTION_UP){
+                    txv.text = "手指彈開"
+                }
+                return true
+            }
+        })
+
         txv = findViewById(R.id.txv)
         txv.textSize = size
         txv.setOnClickListener({
