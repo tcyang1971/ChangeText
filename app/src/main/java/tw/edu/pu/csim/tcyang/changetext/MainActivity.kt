@@ -24,11 +24,9 @@ class MainActivity : AppCompatActivity(), OnClickListener {
                 txv.text = "Lambda短按"
         })
 
-        txv.setOnLongClickListener(object:OnLongClickListener{
-            override fun onLongClick(p0: View?): Boolean {
-                txv.text = "長按"
-                return true //可以試試看false會長按後觸發短按
-            }
+        txv.setOnLongClickListener({
+            txv.text = "Lambda長按"
+            true //可以試試看false會長按後觸發短按
         })
 
         btnA = findViewById(R.id.btnA)
