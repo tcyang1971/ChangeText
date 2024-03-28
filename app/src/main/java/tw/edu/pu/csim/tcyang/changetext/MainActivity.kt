@@ -10,6 +10,7 @@ import android.widget.TextView
 class MainActivity : AppCompatActivity(), OnClickListener {
 
     lateinit var btnA: Button
+    lateinit var btnB: Button
     lateinit var txv: TextView
     var size: Float = 20f
 
@@ -21,10 +22,18 @@ class MainActivity : AppCompatActivity(), OnClickListener {
 
         btnA = findViewById(R.id.btnA)
         btnA.setOnClickListener(this)
+
+        btnB = findViewById(R.id.btnB)
+        btnB.setOnClickListener(this)
     }
 
-    override fun onClick(p0: View?) {
-        size++
+    override fun onClick(v: View?) {
+        if (v == btnA) {
+            size++
+        }
+        else{
+            size--
+        }
         txv.textSize = size
     }
 }
