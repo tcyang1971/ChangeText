@@ -35,5 +35,12 @@ class MainActivity : AppCompatActivity(), OnClickListener {
             size--
         }
         txv.textSize = size
+
+        if (size >= 30) { btnA.isEnabled = false }
+        else if (size <= 10) { btnB.isEnabled = false }
+        else{
+            btnA.isEnabled = true
+            btnB.isEnabled = true
+        }
     }
 }
