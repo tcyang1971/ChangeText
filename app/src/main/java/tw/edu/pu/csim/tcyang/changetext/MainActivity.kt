@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.View.OnClickListener
+import android.view.View.OnLongClickListener
 import android.widget.Button
 import android.widget.TextView
 
@@ -21,6 +22,13 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         txv.textSize = size
         txv.setOnClickListener({
                 txv.text = "Lambda短按"
+        })
+
+        txv.setOnLongClickListener(object:OnLongClickListener{
+            override fun onLongClick(p0: View?): Boolean {
+                txv.text = "長按"
+                return true //可以試試看false會長按後觸發短按
+            }
         })
 
         btnA = findViewById(R.id.btnA)
