@@ -1,7 +1,11 @@
 package tw.edu.pu.csim.tcyang.changetext
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
+import android.os.VibratorManager
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnClickListener
@@ -25,11 +29,31 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         var img: ImageView = findViewById(R.id.img)
         img.setOnTouchListener(object:OnTouchListener{
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                val vibrator =
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                        // API 31以上
+                        val vibratorManager = getSystemService(VIBRATOR_MANAGER_SERVICE) as VibratorManager
+                        vibratorManager.defaultVibrator
+                    }
+                    else {  //API < 31
+                        getSystemService(VIBRATOR_SERVICE) as Vibrator
+                    }
+
                 if (event?.action == MotionEvent.ACTION_DOWN){
                     txv.text = "手指按下"
+                    //持續震動5秒
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                        //API >= 26
+                        vibrator.vibrate(
+                            VibrationEffect.createOneShot(5000,
+                            VibrationEffect.DEFAULT_AMPLITUDE))
+                    } else {
+                        vibrator.vibrate(5000)
+                    }
                 }
                 else if(event?.action == MotionEvent.ACTION_UP){
                     txv.text = "手指彈開"
+                    vibrator.cancel()
                 }
                 return true
             }
