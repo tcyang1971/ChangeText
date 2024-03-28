@@ -19,11 +19,8 @@ class MainActivity : AppCompatActivity(), OnClickListener {
         setContentView(R.layout.activity_main)
         txv = findViewById(R.id.txv)
         txv.textSize = size
-        txv.setOnClickListener(object:OnClickListener{
-            override fun onClick(p0: View?) {
-                txv.text = "短按"
-            }
-
+        txv.setOnClickListener({
+                txv.text = "Lambda短按"
         })
 
         btnA = findViewById(R.id.btnA)
